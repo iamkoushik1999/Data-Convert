@@ -3,6 +3,9 @@ import 'dotenv/config';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
+// Database
+import connectDB from './connection/database.js';
+connectDB();
 
 const app = express();
 

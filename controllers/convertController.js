@@ -1,17 +1,17 @@
-// External Modules
 import asyncHandler from 'express-async-handler';
-// Model
-import dataModel from '../models/dataModel.js';
+import xlsx from 'xlsx';
 
 // ----------------------------------------------------------
 
-// Upload
+// Convert Data
 export const convert = asyncHandler(async (req, res) => {
   const file = req.file;
   if (!file) {
     res.status(400);
     throw new Error('Please Select an Excel file');
   }
+
+  console.log(file);
 
   try {
     const filePath = file.path;

@@ -1,6 +1,5 @@
-// Packages
 import multer from 'multer';
-import cloudinary from 'cloudinary';
+import { v2 as cloudinary } from 'cloudinary';
 import { CloudinaryStorage } from 'multer-storage-cloudinary';
 // ENV
 const { CLOUDINARY_CLOUDNAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET } =
@@ -22,4 +21,5 @@ const storage = new CloudinaryStorage({
   },
 });
 
-exports.upload = multer({ storage: storage });
+const upload = multer({ storage });
+export { upload };

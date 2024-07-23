@@ -5,9 +5,13 @@ import { CloudinaryStorage } from 'multer-storage-cloudinary';
 // Multer storage configuration
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
-  params: {
-    folder: 'File Convert',
-    resource_type: 'raw', // Use 'raw' for non-image files like Excel
+  params: async (req, file) => {
+    const name = Date.now() + '-' + file.originalname;
+    return {
+      folder: 'File Convert',
+      public_id: name,
+      resource_type: 'raw', // Use 'raw' for non-image files like Excel
+    };
   },
 });
 

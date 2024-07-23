@@ -8,7 +8,7 @@ const storage = new CloudinaryStorage({
   params: async (req, file) => {
     const name = Date.now() + '-' + file.originalname;
     return {
-      folder: 'File Convert',
+      folder: 'Excel Upload App',
       public_id: name,
       resource_type: 'raw', // Use 'raw' for non-image files like Excel
     };

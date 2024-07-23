@@ -53,3 +53,38 @@ export const convert = asyncHandler(async (req, res) => {
     throw new Error('Failed to process the Excel file');
   }
 });
+
+// If Multiple sheets in one sheet
+export const multiConvert = asyncHandler(async (req, res) => {
+  const file = req.file;
+  if (!file) {
+    res.status(400);
+    throw new Error('Please Select an Excel file');
+  }
+
+  try {
+    // GET the file from Cloudinary
+    const response = await axios.get(file.path, {
+      responseType: 'arraybuffer',
+    });
+    // Read the Excel file data
+    const workbook = XLSX.read(response.data, { type: 'buffer' });
+    // Initialize an object to hold data for all sheets
+    const allSheetsData = {};
+    // Iterate over all sheet names and convert each sheet to JSON
+    workbook.SheetNames.forEach((sheetName) => {
+      const sheet = workbook.Sheets[sheetName];
+      const jsonData = XLSX.utils.sheet_to_json(sheet);
+      allSheetsData[sheetName] = jsonData;
+    });
+
+    res.status(200).json({
+      message: 'Multi Data Converted',
+      // data: allSheetsData,
+    });
+  } catch (error) {
+    console.log('error', error);
+    res.status(500);
+    throw new Error('Failed to process the Excel file');
+  }
+});

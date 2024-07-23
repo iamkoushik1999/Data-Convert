@@ -3,8 +3,8 @@ const router = Router();
 // Controllers
 import { convert } from '../controllers/convertController.js';
 // Utils
-import { upload } from '../utils/cloudinary.js';
-import { uploadMulter } from '../utils/multer.js';
+import upload from '../utils/upload.js';
+// import { uploadMulter } from '../utils/multer.js';
 
 // ------------------------------- Routes --------------------------------
 
